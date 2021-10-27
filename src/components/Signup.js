@@ -2,39 +2,47 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const Signup = (props) => {
-  
-    let history = useHistory();
-    const [credientials, setCerdientials] = useState({
-      name: "",
-      email: "",
-      password: "",
-      cpassword: "",
-    });
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      const { name, email, password } = credientials;
-      const response = await fetch("http://localhost:5000/api/auth/createuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-  
-        body: JSON.stringify({ name, email, password }),
+  let history = useHistory();
+  const [credientials, setCerdientials] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { name, email, password } = credientials;
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body:JSON.stringify({ name, email, password }),
       });
       const json = await response.json();
-      console.log(json);
+    console.log(json);
+
+    if (json.success) {
+
       if (credientials.password !== credientials.cpassword) {
         props.showAlert("Passwords don't match", "danger");
-      } else if (json.success) {
-        props.showAlert("Account Created successfuly", "success");
-  
-        localStorage.setItem("token", json.authtoken);
+      } 
+      
+      else {
+        
+        localStorage.setItem("token", json.authToken);
         history.push("/");
-      } else {
-        props.showAlert("Invalid Credientials", "danger");
+        props.showAlert("Account Created successfuly", "success");
       }
-    };
+    } 
+    
+    
+    else {
+      props.showAlert("Invalid Credientials", "danger");
+    }
+  };
   const [showPassword, setShowPassword] = useState(false);
   const [showCPassword, setShowCPassword] = useState(false);
 
@@ -51,7 +59,7 @@ const Signup = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name

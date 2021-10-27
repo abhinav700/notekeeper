@@ -43,7 +43,7 @@ const Login = (props) => {
   return (
     <>
       <h2 className="my-4">Login to access your notes</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}  autoComplete="off">
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -96,9 +96,7 @@ const Login = (props) => {
             className="form-check-input"
             id="exampleCheck1"
           />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
+        
         </div>
         <button
           type="submit"
