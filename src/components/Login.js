@@ -1,7 +1,20 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useContext } from "react";
+import noteContext from "../context/notes/noteContext";
+
+
+
+
+
+
+
 
 const Login = (props) => {
+  //  Area where we write the code to deal with themes.
+  const context=useContext(noteContext)
+  let theme=context
+  let setTheme=context
   const [showPassword, setShowPassword] = useState(false);
 
   const handlePasswordClick = () => {
@@ -52,7 +65,7 @@ const Login = (props) => {
           <input
             onChange={onChange}
             type="email"
-            className="form-control"
+            className={`bg-${theme} form-control`}
             name="email"
             id="email"
             value={credientials.email}
@@ -73,7 +86,7 @@ const Login = (props) => {
               onChange={onChange}
               type={`${showPassword ? "text" : "password"}`}
               minLength={5}
-              className="form-control Password"
+              className={`bg-${theme} form-control Password`}
               id="password"
             />
             <i
@@ -90,14 +103,7 @@ const Login = (props) => {
             ></i>
           </div>
         </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-        
-        </div>
+       
         <button
           type="submit"
           className="btn btn-primary"
