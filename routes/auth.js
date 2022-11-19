@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
-const cors=r
+const cors=require('cors');
 const app=express()
 app.use(cors)
 const { body, validationResult } = require("express-validator");
