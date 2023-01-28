@@ -10,6 +10,7 @@ app.use(cors)
 router.get("/fetchallnotes", fetchuser, async (req, res) => {
   try {
     const notes = await Note.find({ user: req.user.id });
+    console.log(req.user);
     res.json(notes);
   } catch (error) {
     res.status(500).send("Internal server occured");
